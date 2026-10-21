@@ -16,6 +16,15 @@ class TaskService:
     def __init__(self, ctx):
         self.ctx = ctx
 
+    def assignable_volunteers(self, actor: User) -> List[dict]:
+        """Give staff a safe assignment picker without exposing account credentials."""
+        actor = self.ctx.refresh(actor)
+        require(actor, "task.manage")
+        users = self.ctx.store.find("users", User,
+                                    lambda u: u.role == Role.VOLUNTEER and u.active
+                                    and not u.locked and u.site_id == actor.site_id)
+        return [{"id": u.id, "name": u.full_name or u.username} for u in sorted(users, key=lambda u: u.id)]
+
     def create_task(self, actor: User, title: str, assigned_to: str, description: str = "", order_id: str = None) -> Task:
         """FR-VTM-01: staff create and assign a task to a volunteer in their own site."""
         actor = self.ctx.refresh(actor)
