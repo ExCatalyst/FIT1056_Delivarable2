@@ -9,7 +9,7 @@ from .errors import ConflictError, NotFound, PermissionDenied, ValidationError
 from .inventory import is_available, record_movement
 from .models import Client, InventoryItem, Order, OrderStatus, Role, Task, User
 from .respectful import check_respectful
-from ..security import check_site, has_permission, require
+from .security import check_site, has_permission, require
 from .validators import parse_datetime, require_positive_int
 
 PICKUP_LABELS = {

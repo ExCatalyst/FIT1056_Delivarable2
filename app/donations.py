@@ -2,7 +2,7 @@
 from typing import List
 
 from .errors import ConflictError, ValidationError
-from ..inventory import receive_donation
+from .inventory import receive_donation
 from .models import Donation, DonationStatus, User
 from .security import check_site, require, resolve_site
 from .validators import normalise_donation_items
