@@ -1,0 +1,2 @@
+streamlit>=1.64,<2
+pytest>=8,<10
